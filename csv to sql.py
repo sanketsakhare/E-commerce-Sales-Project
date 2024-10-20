@@ -51,6 +51,7 @@ for csv_file, table_name in csv_files:
     cursor.execute(create_table_query)
 
     for _, row in df.iterrows():
+        
         values = tuple(None if pd.isna(x) else x for x in row)
         sql = f"INSERT INTO `{table_name}` ({', '.join(['`' + col + '`' for col in df.columns])}) VALUES ({', '.join(['%s'] * len(row))})"
         cursor.execute(sql, values)
